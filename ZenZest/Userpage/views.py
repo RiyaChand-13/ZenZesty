@@ -218,3 +218,23 @@ def checkout(request, username):
         'order_id': order['id'],  # Razorpay order ID
         'amount': total_price,
     })
+
+
+def orders(request, username):
+    customer = get_object_or_404(User, username=username)
+    cart = Cart.objects.filter(customer=customer).first()
+
+    # Fetch cart items and total price before clearing the cart
+    cart_items = cart.items.all() if cart else []
+    total_price = cart.total_price() if cart else 0
+
+    # Clear the cart after fetching its details
+    if cart:
+        cart.items.clear()
+
+    return render(request, 'orders.html', {
+        'username': username,
+        'customer': customer,
+        'cart_items': cart_items,
+        'total_price': total_price,
+    })
