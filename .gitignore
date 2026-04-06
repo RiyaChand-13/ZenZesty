@@ -38,6 +38,7 @@ local_settings.py
 db.sqlite3
 /media
 /staticfiles
+ZenZest/staticfiles/
 
 # IDE
 .vscode/
