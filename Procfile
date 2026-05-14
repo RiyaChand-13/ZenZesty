@@ -1,1 +1,1 @@
-web: gunicorn ZenZest.wsgi:application
+web: gunicorn ZenZest.wsgi --bind 0.0.0.0:$PORT
